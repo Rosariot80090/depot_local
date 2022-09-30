@@ -1,0 +1,69 @@
+/*largeur du logo 100%des 30% définie en header1*/
+
+.logo{
+    /*largeur invariable lorsqu'on rétrécit l'écran*/
+    max-width: 100%;
+}
+
+
+/*largeur de la bande promotionnelle (toute la largeur de la page*/
+
+.promo{
+    width: 100%;
+}
+header{
+    display: flex;
+    /*indique le positionnement en ligne des headers 1 et 2*/
+    flex-direction: row;
+    align-items: center;
+}
+
+/*positionnement du logo*/
+#header1{
+    display: flex;
+    /*le logo occupe 30%de la largeur de la page*/
+    width: 30%;
+    min-width: 200px;
+    /*en ligne avec le bloc header2*/
+    flex-direction: row;
+    height: 150px;
+}
+/*positionnement du texte*/
+header2{
+    display: flex;
+    /*le texte occupe les 70% restants de la page*/
+    width: 70%;
+    min-width: 200px;
+    flex-direction: row; 
+    justify-content: center;
+    font-size: 40px;
+    padding: 45px;
+    height: 100px;
+}
+
+/*bloc de gauche*/
+div1{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    justify-items: left;
+}
+/*bloc de droite*/
+div2{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    justify-items: right;
+    background-color: aquamarine;
+}
+div{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+.pave{
+    display: flex;
+    background-color: black;
+    color: white;
+    padding: 10px;
+}

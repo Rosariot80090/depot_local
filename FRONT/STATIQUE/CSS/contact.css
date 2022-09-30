@@ -1,0 +1,21 @@
+/*largeur du logo 100%des 30% définie en header1*/
+
+.logo{
+    /*largeur invariable lorsqu'on rétrécit l'écran*/
+    margin-top: 0px;
+    padding: 0;
+    max-width: 100%;
+    height: auto;
+}
+.slogan{
+   margin-top: 0px;
+    padding: 0;
+    max-width: 100%;
+    max-height: 50%;
+}
+
+/*largeur de la bande promotionnelle (toute la largeur de la page*/
+
+.promo{
+    width: 100%;
+}

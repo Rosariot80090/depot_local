@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    
+    <title>BT_contact.html</title>
+</head>
+
+<body>
+      
+<div class="container-fluid">
+
+    <div class="row"><!--je crée une ligne et dans cette ligne j'insère deux blocks -->
+
+        <div class="col text-left"><!--le contenu sera à gauche-->
+
+            <div id="block1" class="col px-md-3" ><!--ce block1 occupera 3 colonnes sur les 12 de bootstrap-->
+                <img src="../Images/jarditou_logo.jpg" width=200 class="img-fluid" alt="Image responsive" title="Image responsive" > 
+            </div>
+        </div>
+
+        <div class="col text-right"><!--le contenu sera à droite-->
+
+            <div id="block2" class="col px-md-9"><!--ce block2 occupera les 9 colonnes restantes sur les 12-->
+                <p class="slogan" width="200" style="font-size:40px; ">Tout sur le jardin</p> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand">Jarditou.com</a>
+      
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+        </button>   
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="accueil.html">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="tableau.html">Tableau</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div> 
+
+        <form class="form-check-inline">
+            <input class="form-control mr-sm-2" type="rechercher" placeholder="votre promotion" aria-label="rechercher">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+        </form>
+</nav>
+    
+<div class="container-fluid">
+    <div class="row">
+        <!--insertion d'une image PROMOTION-->
+        <img  src="../Images/promotion.jpg" class="img-fluid vw-100" alt="Image responsive" title="Image responsive">
+    </div>
+</div>
+
+<div class="container-fluid">
+    <section><h3>Contact</h3></section>
+</div>
+
+<hr> <!--Trait horizontal de séparation-->
+
+    
+<form >
+    <div class="container-fluid">
+<br>
+
+        <fieldset>
+        
+            <legend>Vos coordonnées</legend>
+<br>
+
+        <div class="form-group">
+            <label for="nom">Votre nom*:</label>
+            <input type="text" class="form-control form-control-md" id="nom" name="nom" placeholder="Veuillez saisir votre nom" >
+        </div>
+            <br>
+        <div class="form-group">
+            <label for="prénom">Votre prénom*:</label>
+            <input type="text" class="form-control form-control-md" id="prénom" name="prénom" placeholder="Veuillez saisir votre prénom" >   
+        </div>
+<br>
+      
+            Sexe* :
+            
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="genre" value="Homme">
+            <label class="form-check-label" for="Homme">Homme</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="genre" value="Femme">
+            <label class="form-check-label" for="Femme">Femme</label>
+        </div>
+<br><br>
+        
+        <div class="form-group">
+            Date de naissance* :
+            <input type="date" class="form-control form-control-md" id="date" name="ddn">
+        </div>
+        
+<br>
+        <div class="form-group">
+            <label for="Code_postal">Code postal*</label>
+            <input type="text" class="form-control form-control-md" id="Code_postal"  name="code_postal">
+        </div>
+<br>
+
+        <div class="form-group">
+            <label for="Ville">Ville*</label>
+            <input type="text" class="form-control form-control-md" id="Ville"  name="Ville">
+        </div>
+<br>
+        <div class="form-group">
+            <label for="Email">Email*</label>
+            <input type="email" class="form-control form-control-md" id="Email"  name="Email" placeholder="nom.prenom @ afpa.fr">
+        </div>
+<br>
+    </fieldset>
+
+<br><br>
+    
+    <fieldset>
+
+        <legend>Votre demande</legend>
+        <div class="form-group">
+            <label for="sujet">Sujet *:</label> 
+            <select class="form-control form-control-md" id="sujet">
+                
+                <option value="veuillez sélectionner un sujet">Veuillez sélectionner un sujet</option>
+                <option value="Mes commandes">Mes commandes</option>
+                <option value="Question sur un produit">Question sur un poduit</option>
+                <option value="Réclamation">Réclamation</option>
+                <option value="Autres">Autres</option>
+
+            </select>
+        </div>
+            <br>
+        <div class="form-group">
+                Votre question* :
+                <textarea class="form-control form-control-md" id="commentaire" rows="1" cols="50"></textarea>
+        </div>
+        <br>
+            <input type="checkbox" name="j'accepte">
+            * J'accepte le traitement informatique de ce formulaire
+        <br><br>        
+    
+        <br>
+            <input type="submit" value="Envoyer">
+            <input type="submit" value="Annuler">
+        <br><br>
+    </fieldset>
+</div>
+</form>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="Mentions_legales.html" title="Mentions_legales.html">Mentions légales</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Horaires.html" title="Horaires.html">Horaires</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Plan_du_site.html" title="Plan_du_site.html">Plan du site</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>    
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+</body>
+</html>
