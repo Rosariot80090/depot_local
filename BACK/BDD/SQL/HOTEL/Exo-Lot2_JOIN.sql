@@ -3,7 +3,7 @@
 -- 7 - Afficher la liste des hôtels avec leur station
 -- Le résultat doit faire apparaître le nom de la station, le nom de l’hôtel, la catégorie, la ville
 
-SELECT
+SELECT sta_nom
 
 
 --8 - Afficher la liste des chambres et leur hôtel
