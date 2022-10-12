@@ -28,8 +28,11 @@ INNER JOIN chambre ON cha_capacite>1 AND hot_ville = "Bretou";
 --Le résultat doit faire apparaître le nom du client, le nom de l’hôtel, la date de réservation
 
 SELECT cli_nom, hot_nom, res_date
-FROM client, reservation, hotel
-where client.cli_id = reservation.res_cli_id;
+FROM client
+JOIN reservation ON client.cli_id = reservation.res_cli_id
+JOIN chambre ON reservation.res_cha_id = chambre.cha_hot_id
+JOIN hotel ON hotel.hot_id =  chambre.cha_hot_id;
+
 --11 - Afficher la liste des chambres avec le nom de l’hôtel et le nom de la station
 --Le résultat doit faire apparaître le nom de la station, le nom de l’hôtel, le numéro de la chambre et sa capacité
 
@@ -41,4 +44,8 @@ JOIN chambre ON chambre.cha_hot_id = hotel.hot_id;
 --12 - Afficher les réservations avec le nom du client et le nom de l’hôtel avec datediff
 --Le résultat doit faire apparaître le nom du client, le nom de l’hôtel, la date de début du séjour et la durée du séjour
 
-SELECT cli_nom, hot_nom, res_date_debut, res_date_fin
+SELECT cli_nom, hot_nom, res_date_debut, (SELECT DATEDIFF(res_date_fin,res_date_debut))AS duree
+FROM client
+JOIN reservation ON reservation.res_cli_id = client.cli_id
+JOIN chambre ON chambre.cha_hot_id = reservation.res_cha_id
+JOIN hotel ON hotel.hot_id = chambre.cha_hot_id; 
