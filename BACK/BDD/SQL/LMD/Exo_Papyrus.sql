@@ -28,37 +28,105 @@ WHERE stkphy<= stkale AND qteann<1000;
 
         L’affichage (département, nom fournisseur) sera effectué par département décroissant, puis par ordre alphabétique. */
 
-
+SELECT f.numfou,f.nomfou,f.posfou
+FROM fournis f
+WHERE f.posfou LIKE "7%" OR f.posfou LIKE "92%";
 
 /*6. Quelles sont les commandes passées en mars et en avril ? */
+
+SELECT EXTRACT(MONTH FROM datcom)AS MoisCde, numcom , numfou
+FROM entcom
+WHERE EXTRACT(MONTH FROM datcom)="3"OR EXTRACT(MONTH FROM datcom)="4" ;
 
 /*7. Quelles sont les commandes du jour qui ont des observations particulières ?
 
         Afficher numéro de commande et date de commande */
 
+SELECT numcom, datcom, obscom
+FROM entcom
+WHERE obscom!=" " ;
+
 /*8. Lister le total de chaque commande par total décroissant.
 
         Afficher numéro de commande et total */
 
-/*9. Lister les commandes dont le total est supérieur à 10000€ ; on exclura dans le calcul du total les articles commandés en quantité supérieure ou égale à 1000.
+SELECT c.numcom,c.numfou,c.datcom,(l.qteliv*l.priuni)AS total
+FROM entcom c
+JOIN vente v ON v.numfou=c.numfou
+JOIN ligcom l ON l.numcom=c.numcom
+GROUP BY c.numcom
+ORDER BY total DESC ;
+
+/*9. Lister les commandes dont le total est supérieur à 10000€ ; 
+        on exclura dans le calcul du total les articles commandés en quantité supérieure ou égale à 1000.
 
         Afficher numéro de commande et total */
+
+SELECT c.numcom,c.numfou,c.datcom,l.qtecde,(l.qteliv*l.priuni)AS total
+FROM entcom c
+JOIN ligcom l ON l.numcom=c.numcom
+WHERE l.qtecde<1000;
 
 /*10. Lister les commandes par nom de fournisseur.
 
         Afficher nom du fournisseur, numéro de commande et date */
 
+SELECT f.nomfou, c.numcom,c.numfou,c.datcom
+FROM entcom c
+RIGHT JOIN fournis f ON f.numfou=c.numfou
+JOIN vente v ON v.numfou=c.numfou
+JOIN ligcom l ON l.numcom=c.numcom
+GROUP BY c.numcom;
+
 /*11. Sortir les produits des commandes ayant le mot "urgent' en observation.
 
-        Afficher numéro de commande, nom du fournisseur, libellé du produit et sous total (= quantité commandée * prix unitaire) */
+        Afficher numéro de commande, nom du fournisseur, 
+        libellé du produit et sous total (= quantité commandée * prix unitaire) */
 
-/*12. Coder de 2 manières différentes la requête suivante : Lister le nom des fournisseurs susceptibles de livrer au moins un article. */
+SELECT DISTINCT c.numcom,f.nomfou,p.codart, p.libart,l.qtecde, l.priuni,(l.qtecde*l.priuni) AS sousTotal, c.obscom
+FROM entcom c
+JOIN fournis f ON f.numfou=c.numfou
+JOIN vente v ON v.numfou=c.numfou
+JOIN ligcom l ON l.numcom=c.numcom
+JOIN produit p ON f.numfou=c.numfou
+WHERE obscom != "Commande urgente"
+ORDER BY c.numcom;
 
-/*13. Coder de 2 manières différentes la requête suivante : Lister les commandes dont le fournisseur est celui de la commande n°70210. 
+/*12. Coder de 2 manières différentes la requête suivante : 
+        Lister le nom des fournisseurs susceptibles de livrer au moins un article. */
+
+
+SELECT DISTINCT f.numfou, f.nomfou, c.numcom, p.codart, p.libart, p.stkphy, l.qtecde, l.qteliv
+FROM entcom c
+RIGHT OUTER JOIN fournis f ON f.numfou=c.numfou /*Priorité à doite de JOIN.												Me retourne tous les fournisseur même ceux qui n'ont pas passés commande*/
+LEFT OUTER JOIN ligcom l ON c.numcom=l.numcom /*Priorité à gauche de JOIN. Me retourne tous les numéros de commandes*/
+RIGHT OUTER JOIN produit p ON l.codart=p.codart/* Me retourne tous les produits même ceux qui n'ont pas été commandés*/
+WHERE l.qteliv!=0
+ORDER BY l.numcom
+
+
+SELECT f.numfou, f.nomfou, c.numcom, p.codart, p.libart,p.stkphy, l.qtecde, l.qteliv
+FROM fournis f
+RIGHT OUTER JOIN entcom c ON c.numfou=f.numfou 
+/*Priorité à la table des commandes.Me retourne ceux qui ont passé commande*/
+
+/*LEFT OUTER  JOIN entcom c 
+/*Priorité à la table des fournisseurs.Me retourne tous les fournissuers même ceux qui n'ont pas passé commande*/
+
+LEFT OUTER JOIN ligcom l ON l.numcom=c.numcom
+/*la table ligcom me permet de faire la liason en tre numéro de commande et produit*/
+
+RIGHT OUTER JOIN produit p ON l.codart=p.codart
+  
+WHERE l.qteliv!=0
+ORDER  BY l.numcom 
+/*13. Coder de 2 manières différentes la requête suivante : 
+        Lister les commandes dont le fournisseur est celui de la commande n°70210. 
 
         Afficher numéro de commande et date */
 
-/*14. Dans les articles susceptibles d’être vendus, lister les articles moins chers (basés sur Prix1) que le moins cher des rubans (article dont le premier caractère commence par R).
+/*14. Dans les articles susceptibles d’être vendus, 
+        lister les articles moins chers (basés sur Prix1) que le moins cher des rubans (article dont le premier caractère commence par R).
 
         Afficher libellé de l’article et prix1 */
 
@@ -66,7 +134,8 @@ WHERE stkphy<= stkale AND qteann<1000;
 
         La liste sera triée par produit puis fournisseur */
 
-/*16. Sortir la liste des fournisseurs susceptibles de livrer les produits dont le stock est inférieur ou égal à 150 % du stock d'alerte, et un délai de livraison d'au maximum 30 jours.
+/*16. Sortir la liste des fournisseurs susceptibles de livrer les produits dont le stock est inférieur ou égal à 150 % du stock d'alerte, 
+        et un délai de livraison d'au maximum 30 jours.
 
         La liste sera triée par fournisseur puis produit */
 
