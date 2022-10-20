@@ -141,6 +141,14 @@ WHERE c.numcom=70210;
 
         Afficher libellé de l’article et prix1 */
 
+SELECT distinct v.codart,p.libart, v.prix1
+FROM vente v
+JOIN produit p ON p.codart=v.codart
+/*recherche des articles commencant par R*/
+/*WHERE v.codart LIKE "R%"*/
+WHERE v.prix1<120
+/*(SELECT MIN(v.prix1) FROM vente WHERE p.libart LIKE "r%")*/
+
 /*15. Sortir la liste des fournisseurs susceptibles de livrer les produits dont le stock est inférieur ou égal à 150 % du stock d'alerte.
 
         La liste sera triée par produit puis fournisseur */
