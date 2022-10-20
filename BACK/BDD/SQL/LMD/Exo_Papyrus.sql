@@ -120,10 +120,21 @@ RIGHT OUTER JOIN produit p ON l.codart=p.codart
   
 WHERE l.qteliv!=0
 ORDER  BY l.numcom 
+
 /*13. Coder de 2 manières différentes la requête suivante : 
         Lister les commandes dont le fournisseur est celui de la commande n°70210. 
 
         Afficher numéro de commande et date */
+
+SELECT c.numcom,f.nomfou
+FROM entcom c
+JOIN fournis f ON c.numfou=f.numfou
+WHERE c.numcom=70210;
+
+SELECT f.nomfou,c.numcom
+FROM fournis f
+JOIN entcom c ON c.numfou=f.numfou
+WHERE c.numcom=70210;
 
 /*14. Dans les articles susceptibles d’être vendus, 
         lister les articles moins chers (basés sur Prix1) que le moins cher des rubans (article dont le premier caractère commence par R).
@@ -133,17 +144,50 @@ ORDER  BY l.numcom
 /*15. Sortir la liste des fournisseurs susceptibles de livrer les produits dont le stock est inférieur ou égal à 150 % du stock d'alerte.
 
         La liste sera triée par produit puis fournisseur */
+SELECT f.numfou,f.nomfou,p.libart, p.stkphy,p.stkale,ROUND((p.stkale*1.5),0)AS stksecu
+FROM produit p
+JOIN vente v ON v.codart=p.codart
+JOIN fournis f ON f.numfou=v.numfou
+WHERE p.stkphy<=ROUND((p.stkale*1.5),0)
+ORDER BY p.libart,f.nomfou;
 
 /*16. Sortir la liste des fournisseurs susceptibles de livrer les produits dont le stock est inférieur ou égal à 150 % du stock d'alerte, 
         et un délai de livraison d'au maximum 30 jours.
 
         La liste sera triée par fournisseur puis produit */
-
+SELECT f.numfou,f.nomfou,p.libart, p.stkphy,p.stkale,ROUND((p.stkale*1.5),0)AS stksecu,v.delliv<=30
+FROM produit p
+JOIN vente v ON v.codart=p.codart
+JOIN fournis f ON f.numfou=v.numfou
+WHERE p.stkphy<=ROUND((p.stkale*1.5),0)AND v.delliv<=30
+ORDER BY f.nomfou,p.libart;
 /*17. Avec le même type de sélection que ci-dessus, sortir un total des stocks par fournisseur, triés par total décroissant. */
+
+
+SELECT f.nomfou,SUM(p.stkphy)
+FROM produit p
+JOIN vente v ON v.codart=p.codart
+JOIN fournis f ON f.numfou=v.numfou
+WHERE p.stkphy<=ROUND((p.stkale*1.5),0)AND v.delliv<=30
+GROUP BY f.nomfou
+ORDER BY SUM(p.stkphy)DESC;
 
 /*18. En fin d'année, sortir la liste des produits dont la quantité réellement commandée dépasse 90% de la quantité annuelle prévue. */
 
+
+SELECT p.codart,p.libart,p.qteann,l.qtecde
+FROM produit p
+JOIN ligcom l ON l.codart=p.codart
+WHERE l.qtecde>(p.qteann*0.90)
+
 /*19.Calculer le chiffre d'affaire par fournisseur pour l'année 2018, sachant que les prix indiqués sont hors taxes et que le taux de TVA est 20%.*/
+SELECT EXTRACT(YEAR FROM c.datcom)AS "Année",f.nomfou,c.numcom,
+SUM(((l.qteliv*l.priuni)+(l.qteliv*l.priuni*0.20)))AS "TotaLivraison"
+FROM entcom c
+JOIN fournis f ON f.numfou=c.numfou
+JOIN ligcom l ON l.numcom=c.numcom
+JOIN produit p ON p.codart=l.codart
+WHERE EXTRACT(YEAR FROM c.datcom) =2018
 
 
 
