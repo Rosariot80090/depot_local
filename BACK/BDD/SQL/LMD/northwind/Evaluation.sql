@@ -26,7 +26,6 @@ WHERE c.Country="France";
 2- Liste des produits vendus par le fournisseur "Exotic Liquids" :
 
     Requête Northwind
-
 SELECT p.ProductName AS Produit,p.UnitPrice AS Prix
 FROM suppliers s
 RIGHT JOIN products p ON p.SupplierID=s.SupplierID 
@@ -47,18 +46,46 @@ ORDER BY COUNT(s.CompanyName) desc
 4- Liste des clients français ayant passé plus de 10 commandes :
 
     Requête Northwind
-
+SELECT c.CustomerID,c.CompanyName,COUNT(o.OrderID)AS NbreCommandes
+FROM customers c
+right JOIN orders o ON o.CustomerID=c.CustomerID
+WHERE c.Country="France"
+GROUP BY o.CustomerID
+HAVING COUNT(o.OrderID)>10
 
 5- Liste des clients dont le montant cumulé de toutes les commandes passées est supérieur à 30000 € :
 NB: chiffre d'affaires (CA) = total des ventes
 
     Requête Northwind
+Tables nécessaires:
+customers(clients) = customerID
+orders(commandes) = orderID (n°decommande), liaison avec customerID
+orderdetails(détail par n°Cde), productID, UnitPrice*Quantity 
 
+SELECT c.CustomerID,c.CompanyName,sum(od.Quantity*od.UnitPrice)AS CA
+FROM customers c
+RIGHT JOIN orders o ON o.CustomerID=c.CustomerID
+LEFT JOIN orderdetails od ON od.OrderID=o.OrderID
+LEFT JOIN products p ON p.ProductID=od.ProductID
+GROUP BY c.CompanyName
+HAVING SUM(od.Quantity*od.UnitPrice)>30000
+ORDER BY sum(od.Quantity*od.UnitPrice)desc
 
 6- Liste des pays dans lesquels des produits fournis par "Exotic Liquids" ont été livrés :
 
     Requête Northwind
+Tables nécessaires:
+suppliers(fournisseurs), chercher un lien avec le client (customers) et où réside le client
 
+SELECT DISTINCT  s.CompanyName,o.ShipCountry
+FROM suppliers s
+RIGHT JOIN products p ON p.SupplierID=s.SupplierID
+RIGHT JOIN orderdetails od ON od.ProductID=p.ProductID
+LEFT JOIN orders o ON o.OrderID=od.OrderID
+LEFT JOIN customers c ON c.CustomerID=o.CustomerID 
+
+WHERE s.CompanyName="Exotic Liquids"
+ORDER BY o.ShipCountry
 
 7- Chiffre d'affaires global sur les ventes de 1997 :
 NB: chiffre d'affaires (CA) = total des ventes
@@ -67,10 +94,18 @@ NB: chiffre d'affaires (CA) = total des ventes
 
     Attention : dans une même vente, un produit peut être vendu plusieurs fois ! Il faut donc d'abord préparer le sous-total de chaque produit, qui tient compte de son prix unitaire et de la quantité vendue...
 
+SELECT EXTRACT(YEAR FROM o.OrderDate)AS "Année",sum(od.Quantity*od.UnitPrice)AS MontantVentes97
+FROM orderdetails od
+JOIN orders o ON o.OrderID=od.OrderID
+LEFT JOIN products p ON p.ProductID=od.ProductID
+WHERE EXTRACT(YEAR FROM o.OrderDate)=1997
+
 
 8- Chiffre d'affaires détaillé par mois, sur les ventes de 1997 :
 
     Requête Northwind
+
+
 
 
 9- A quand remonte la dernière commande du client nommé "Du monde entier" ?
