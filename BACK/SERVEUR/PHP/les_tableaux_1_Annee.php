@@ -52,7 +52,7 @@ Triez ensuite votre tableau en utilisant comme critère le nombre de jours, puis
             <td class="center"> Août </td>
             <td class="center"> 31 </td>
             </tr>
-        <tr>
+        <tr> echo $capitales;
             <td class="center"> Septembre </td>
             <td class="center"> 30 </td>
             </tr>
