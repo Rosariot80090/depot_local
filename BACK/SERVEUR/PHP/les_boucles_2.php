@@ -10,6 +10,6 @@ while($i<500){
    
    $i++;
   }
-
+  $message="<li style='color:green'>Password valide</li>";
 ?>
-    
+    $message="<li style='color:green'>Password valide</li>";

@@ -52,10 +52,10 @@ Triez ensuite votre tableau en utilisant comme critère le nombre de jours, puis
             <td class="center"> Août </td>
             <td class="center"> 31 </td>
             </tr>
-        <tr> echo $capitales;
+        <tr>
             <td class="center"> Septembre </td>
             <td class="center"> 30 </td>
-            </tr>
+            </tr>    
         <tr>
             <td class="center"> Octobre </td>
             <td class="center"> 31 </td>
@@ -71,7 +71,7 @@ Triez ensuite votre tableau en utilisant comme critère le nombre de jours, puis
     </tbody>
 </table>
 <br>
-<br>
+<br>    
 <?php
  
 $tableau = array('Janvier'=>31, 'Février'=>28, 'Mars'=>31, 'Avril'=>30, 'Mai'=>31, 'Juin'=>30, 
@@ -81,7 +81,7 @@ asort($tableau);
 
  foreach($tableau as $mois=>$nbrJours)
   { 
-
+    $message="<li style='color:green'>Password valide</li>";
     echo 'Le nombre de jours associant le mois de  ' .$mois.' est '.$nbrJours.'<br>'; 
  
   } 

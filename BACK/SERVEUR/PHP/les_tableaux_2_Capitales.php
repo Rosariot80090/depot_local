@@ -97,7 +97,7 @@ $pays = count($capitales);
 
 //  Suppression des capitales commençant par la lettre 'B'
 
-/*
+
 ksort ($capitales);
 foreach($capitales as $capitale => $pays)
 {
@@ -110,4 +110,6 @@ foreach($capitales as $capitale => $pays)
     else echo $capitale.   "   ========>   " . $pays . "<br>";
 }
 
-*/
+
+
+
