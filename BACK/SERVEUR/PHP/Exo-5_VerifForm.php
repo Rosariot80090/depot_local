@@ -48,7 +48,6 @@
 <form action="monscript.php" method="get" id="contactForm">
 
 
-
     <fieldset>
         <legend>Vos coordonnées</legend>
 
@@ -136,6 +135,9 @@
             
 </nav>    
 </form>
+<?php
+    
+?>
 <script src="../EVALUATION/Exo-5_VerifForm.js"></script>
 </body>
 </html>

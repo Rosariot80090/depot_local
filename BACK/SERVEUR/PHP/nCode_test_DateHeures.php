@@ -11,7 +11,7 @@
 Réponse  :  -->
 
 <form method="post" action="nCode_test_DateHeures.php">
-    <p><label for="annee"> Entrez votre année_test : </label> <input type="number" name="annee"> 
+    <p><!--<label for="annee"--> Entrez votre année_test : <!--</label>--> <input type="number" name="annee"> 
     <input type="submit" name="valider" value="Valider"></p>
 </form>
 
