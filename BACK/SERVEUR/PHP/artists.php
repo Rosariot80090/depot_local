@@ -22,22 +22,29 @@
       <title>PDO - Liste</title>
 </head>
 <body>
-    <table class="border">
+// Début de page : traitement PHP + entête HTML
+// ...
+
+    <table class='border'>
         <tr>
-            <th class="center">ID</th>
-            <th class="center">Nom</th>
+            <th>ID</th>
+            <th>Nom</th>
+            <!-- Ici, on ajoute une colonne pour insérer un lien -->
+            <th>Fiche</th>
         </tr>
 
         <?php foreach ($tableau as $artist): ?>
-
         <tr>
-            <td class="center"><?= $artist->artist_id ?></td>
-            <td class="center"><?= $artist->artist_name ?></td>
+            <td><?= $artist->artist_id ?></td>
+            <td><?= $artist->artist_name ?></td>
+            <!-- Ici, on ajoute un lien par artiste pour accéder à sa fiche : -->
+            <td><a href="artist_detail.php?id=<?= $artist->artist_id ?>">Détail</a></td>
         </tr>
-
         <?php endforeach; ?>
 
     </table>
+
+// Fin de page : fermetures de blocs HTML
 </body>
 
 <style>
