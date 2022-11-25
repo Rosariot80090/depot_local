@@ -30,7 +30,6 @@
 
         <?php foreach ($tableau as $artist): ?>
 
-       
         <tr>
             <td class="center"><?= $artist->artist_id ?></td>
             <td class="center"><?= $artist->artist_name ?></td>
