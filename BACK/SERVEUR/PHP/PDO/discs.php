@@ -32,11 +32,12 @@ $requete->closeCursor();
         <?php foreach ($tableau as $disc):?>
 
         <tr >
-        
+        <span>
         <td width=50%>  
             <img src="images/<?= $disc->disc_picture ?>" height="50%" width="50%" alt="">
         </td>
-          
+        </span>
+        <span> 
         <td class="detail">
             Titre :<?= $disc->disc_title ?><br>
             Nom de l'artiste :<?= $disc->artist_name ?><br>
@@ -46,6 +47,7 @@ $requete->closeCursor();
             Prix :<?= $disc->disc_price ?><br>
             <a href="disc_detail.php?id=<?= $disc->disc_id ?>">Détail</a>
         </td>
+        </span>
         </tr>
              
         <?php endforeach; ?>
